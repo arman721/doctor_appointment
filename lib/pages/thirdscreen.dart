@@ -1,10 +1,13 @@
+import 'package:doc/assets/models/packages.dart';
+import 'package:doc/controller/cont.dart';
 import 'package:doc/pages/fourthscreen.dart';
 import 'package:doc/pages/secondscrren.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ThirdScreen extends StatelessWidget {
-  const ThirdScreen({super.key});
+  ThirdScreen({super.key});
+  final BookingController bookingController = Get.put(BookingController());
 
   @override
   Widget build(BuildContext context) {
@@ -109,7 +112,7 @@ class ThirdScreen extends StatelessWidget {
                               color: const Color.fromARGB(82, 0, 0, 0)),
                         ),
                         Text(
-                          "Messaging",
+                          "${package.packages[bookingController.groupvalue.value]}",
                           style: TextStyle(fontSize: 25, color: Colors.black),
                         )
                       ],
@@ -124,7 +127,7 @@ class ThirdScreen extends StatelessWidget {
                               color: const Color.fromARGB(82, 0, 0, 0)),
                         ),
                         Text(
-                          "30 minutes",
+                          "${package.duration[bookingController.duration.value]}",
                           style: TextStyle(fontSize: 25, color: Colors.black),
                         )
                       ],
