@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class FirstScrren extends StatelessWidget {
-  final controller = Get.put(PageController());
+  final BookingController bookingController = Get.put(BookingController());
   FirstScrren({super.key});
 
   @override
@@ -217,10 +217,10 @@ class FirstScrren extends StatelessWidget {
                             GetBuilder<BookingController>(
                                 builder: (bookingController) {
                               return Container(
-                                height: 50,
+                                height: 60,
                                 child: ListView.separated(
-                                  scrollDirection: Axis.horizontal,
                                   itemCount: 5,
+                                  scrollDirection: Axis.horizontal,
                                   itemBuilder:
                                       (BuildContext context, int index) {
                                     return InkWell(
@@ -232,36 +232,46 @@ class FirstScrren extends StatelessWidget {
                                         width: 100,
                                         height: 50,
                                         decoration: BoxDecoration(
-                                            border: Border.all(
-                                                color: Colors.black26),
                                             color: index ==
                                                     bookingController.time.value
                                                 ? Colors.blueAccent
                                                 : Colors.white,
+                                            border: Border.all(
+                                                color: const Color.fromARGB(
+                                                    96, 108, 106, 106)),
                                             borderRadius:
                                                 BorderRadius.circular(30)),
-                                        child: Text(
-                                          "Time",
-                                          style: TextStyle(
-                                            fontSize: 20,
-                                            color: index ==
-                                                    bookingController.time.value
-                                                ? Colors.white
-                                                : Colors.black,
-                                          ),
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              "Time",
+                                              style: TextStyle(
+                                                fontSize: 25,
+                                                color: index ==
+                                                        bookingController
+                                                            .time.value
+                                                    ? Colors.white
+                                                    : Colors.black,
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     );
                                   },
-                                  separatorBuilder:
-                                      (BuildContext context, int index) {
+                                  separatorBuilder: (context, index) {
                                     return SizedBox(
-                                      width: 15,
+                                      width: 10,
                                     );
                                   },
                                 ),
                               );
                             }),
+                            SizedBox(
+                              height: 10,
+                            ),
                           ],
                         ),
                       ),
