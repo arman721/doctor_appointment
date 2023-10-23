@@ -1,5 +1,5 @@
 import 'package:doc/assets/models/packages.dart';
-import 'package:doc/controller/cont.dart';
+import 'package:doc/controller/bookingcontroller.dart';
 import 'package:doc/pages/firstscreen.dart';
 import 'package:doc/pages/thirdscreen.dart';
 import 'package:flutter/material.dart';
@@ -149,7 +149,7 @@ class SecondScrren extends StatelessWidget {
                                       "${package.packages[index]} with doctor"),
                                   trailing: Radio(
                                       value: index,
-                                      groupValue: controller.groupvalue.value,
+                                      groupValue: controller.packagevalue.value,
                                       onChanged: (val) {
                                         controller.changegroupvalue(val!);
                                       }),

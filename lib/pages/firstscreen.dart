@@ -1,3 +1,4 @@
+import 'package:doc/controller/bookingcontroller.dart';
 import 'package:doc/pages/secondscrren.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -45,8 +46,7 @@ class FirstScrren extends StatelessWidget {
                                           "lib/assets/images/doc.jpg"),
                                     ),
                                     Padding(
-                                      padding:
-                                          const EdgeInsets.only(left: 18.0),
+                                      padding: EdgeInsets.only(left: 18.0),
                                       child: Column(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
@@ -130,54 +130,76 @@ class FirstScrren extends StatelessWidget {
                               SizedBox(
                                 height: 15,
                               ),
-                              Container(
-                                height: 60,
-                                child: ListView.separated(
-                                  itemCount: 5,
-                                  scrollDirection: Axis.horizontal,
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    return Container(
-                                      alignment: Alignment.center,
-                                      width: 100,
-                                      height: 50,
-                                      decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          border: Border.all(
-                                              color: const Color.fromARGB(
-                                                  96, 108, 106, 106)),
-                                          borderRadius:
-                                              BorderRadius.circular(30)),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            "Day",
-                                            style: TextStyle(
-                                                fontSize: 20,
-                                                color: Colors.black),
+                              GetBuilder<BookingController>(
+                                  builder: (bookingController) {
+                                return Container(
+                                  height: 60,
+                                  child: ListView.separated(
+                                    itemCount: 5,
+                                    scrollDirection: Axis.horizontal,
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return InkWell(
+                                        onTap: () {
+                                          bookingController.getdate(index);
+                                        },
+                                        child: Container(
+                                          alignment: Alignment.center,
+                                          width: 100,
+                                          height: 50,
+                                          decoration: BoxDecoration(
+                                              color: index ==
+                                                      bookingController
+                                                          .date.value
+                                                  ? Colors.blueAccent
+                                                  : Colors.white,
+                                              border: Border.all(
+                                                  color: const Color.fromARGB(
+                                                      96, 108, 106, 106)),
+                                              borderRadius:
+                                                  BorderRadius.circular(30)),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                "Day",
+                                                style: TextStyle(
+                                                  fontSize: 20,
+                                                  color: index ==
+                                                          bookingController
+                                                              .date.value
+                                                      ? Colors.white
+                                                      : Colors.black,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 2,
+                                              ),
+                                              Text(
+                                                "Date",
+                                                style: TextStyle(
+                                                  fontSize: 20,
+                                                  color: index ==
+                                                          bookingController
+                                                              .date.value
+                                                      ? Colors.white
+                                                      : Colors.black,
+                                                ),
+                                              ),
+                                            ],
                                           ),
-                                          SizedBox(
-                                            height: 2,
-                                          ),
-                                          Text(
-                                            "Date",
-                                            style: TextStyle(
-                                                fontSize: 20,
-                                                color: Colors.black),
-                                          ),
-                                        ],
-                                      ),
-                                    );
-                                  },
-                                  separatorBuilder: (context, index) {
-                                    return SizedBox(
-                                      width: 10,
-                                    );
-                                  },
-                                ),
-                              ),
+                                        ),
+                                      );
+                                    },
+                                    separatorBuilder: (context, index) {
+                                      return SizedBox(
+                                        width: 10,
+                                      );
+                                    },
+                                  ),
+                                );
+                              }),
                             ],
                           )),
                       Expanded(
@@ -192,37 +214,54 @@ class FirstScrren extends StatelessWidget {
                             SizedBox(
                               height: 10,
                             ),
-                            Container(
-                              height: 50,
-                              child: ListView.separated(
-                                scrollDirection: Axis.horizontal,
-                                itemCount: 5,
-                                itemBuilder: (BuildContext context, int index) {
-                                  return Container(
-                                    alignment: Alignment.center,
-                                    width: 100,
-                                    height: 50,
-                                    decoration: BoxDecoration(
-                                        border:
-                                            Border.all(color: Colors.black26),
-                                        color: Colors.white,
-                                        borderRadius:
-                                            BorderRadius.circular(30)),
-                                    child: Text(
-                                      "Time",
-                                      style: TextStyle(
-                                          fontSize: 20, color: Colors.black),
-                                    ),
-                                  );
-                                },
-                                separatorBuilder:
-                                    (BuildContext context, int index) {
-                                  return SizedBox(
-                                    width: 15,
-                                  );
-                                },
-                              ),
-                            ),
+                            GetBuilder<BookingController>(
+                                builder: (bookingController) {
+                              return Container(
+                                height: 50,
+                                child: ListView.separated(
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: 5,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    return InkWell(
+                                      onTap: () {
+                                        bookingController.gettime(index);
+                                      },
+                                      child: Container(
+                                        alignment: Alignment.center,
+                                        width: 100,
+                                        height: 50,
+                                        decoration: BoxDecoration(
+                                            border: Border.all(
+                                                color: Colors.black26),
+                                            color: index ==
+                                                    bookingController.time.value
+                                                ? Colors.blueAccent
+                                                : Colors.white,
+                                            borderRadius:
+                                                BorderRadius.circular(30)),
+                                        child: Text(
+                                          "Time",
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            color: index ==
+                                                    bookingController.time.value
+                                                ? Colors.white
+                                                : Colors.black,
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  separatorBuilder:
+                                      (BuildContext context, int index) {
+                                    return SizedBox(
+                                      width: 15,
+                                    );
+                                  },
+                                ),
+                              );
+                            }),
                           ],
                         ),
                       ),
