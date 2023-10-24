@@ -43,8 +43,8 @@ class ThirdScreen extends StatelessWidget {
                     children: [
                       CircleAvatar(
                         radius: 70,
-                        backgroundImage:
-                            AssetImage("lib/assets/images/doc.jpg"),
+                        backgroundImage: NetworkImage(
+                            "https://hireforekam.s3.ap-south-1.amazonaws.com/doctors/4-Doctor.png"),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(left: 18.0),
@@ -53,11 +53,11 @@ class ThirdScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "doctor name",
+                              "${bookingController.doc_list[bookingController.doctorindex.value].doctorName}",
                               style: TextStyle(fontSize: 25),
                             ),
                             Text(
-                              "doctor post",
+                              "${bookingController.doc_list[bookingController.doctorindex.value].speciality}",
                               style: TextStyle(
                                   fontSize: 18,
                                   color: Color.fromARGB(141, 48, 24, 24)),
@@ -66,9 +66,9 @@ class ThirdScreen extends StatelessWidget {
                               height: 10,
                             ),
                             Text(
-                              "doctor location",
+                              "${bookingController.doc_list[bookingController.doctorindex.value].location}",
                               style: TextStyle(
-                                  fontSize: 20,
+                                  fontSize: 18,
                                   color: Color.fromARGB(141, 48, 24, 24)),
                             ),
                           ],

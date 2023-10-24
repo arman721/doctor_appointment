@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class FirstScrren extends StatelessWidget {
-  final BookingController bookingController = Get.put(BookingController());
   FirstScrren({super.key});
 
+  final BookingController bookingController = Get.put(BookingController());
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -42,8 +42,8 @@ class FirstScrren extends StatelessWidget {
                                   children: [
                                     CircleAvatar(
                                       radius: 50,
-                                      backgroundImage: AssetImage(
-                                          "lib/assets/images/doc.jpg"),
+                                      backgroundImage: NetworkImage(
+                                          "${bookingController.doc_list[bookingController.doctorindex.value].image}"),
                                     ),
                                     Padding(
                                       padding: EdgeInsets.only(left: 18.0),
@@ -54,11 +54,11 @@ class FirstScrren extends StatelessWidget {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            "doctor name",
+                                            "${bookingController.doc_list[bookingController.doctorindex.value].doctorName}",
                                             style: TextStyle(fontSize: 25),
                                           ),
                                           Text(
-                                            "doctor post",
+                                            "${bookingController.doc_list[bookingController.doctorindex.value].speciality}",
                                             style: TextStyle(
                                                 fontSize: 18,
                                                 color: Color.fromARGB(
@@ -68,7 +68,7 @@ class FirstScrren extends StatelessWidget {
                                             height: 10,
                                           ),
                                           Text(
-                                            "doctor location",
+                                            "${bookingController.doc_list[bookingController.doctorindex.value].location}",
                                             style: TextStyle(
                                                 fontSize: 20,
                                                 color: Color.fromARGB(
@@ -93,21 +93,37 @@ class FirstScrren extends StatelessWidget {
                               Expanded(
                                   flex: 1,
                                   child: Counter(
-                                      count: 700,
+                                      count: bookingController
+                                          .doc_list[bookingController
+                                              .doctorindex.value]
+                                          .patientsServed,
                                       info: "Patients",
                                       im: "patients")),
                               Expanded(
                                   flex: 1,
                                   child: Counter(
-                                      count: 10, info: "Year Exp", im: "exp")),
+                                      count: bookingController
+                                          .doc_list[bookingController
+                                              .doctorindex.value]
+                                          .yearsOfExperience,
+                                      info: "Year Exp",
+                                      im: "exp")),
                               Expanded(
                                   flex: 1,
                                   child: Counter(
-                                      count: 4, info: "Rating", im: "rating")),
+                                      count: bookingController
+                                          .doc_list[bookingController
+                                              .doctorindex.value]
+                                          .rating,
+                                      info: "Rating",
+                                      im: "rating")),
                               Expanded(
                                   flex: 1,
                                   child: Counter(
-                                      count: 456,
+                                      count: bookingController
+                                          .doc_list[bookingController
+                                              .doctorindex.value]
+                                          .numberOfReviews,
                                       info: "Review",
                                       im: "review")),
                             ],
@@ -135,7 +151,11 @@ class FirstScrren extends StatelessWidget {
                                 return Container(
                                   height: 60,
                                   child: ListView.separated(
-                                    itemCount: 5,
+                                    itemCount: bookingController
+                                        .doc_list[
+                                            bookingController.doctorindex.value]
+                                        .availability
+                                        .length,
                                     scrollDirection: Axis.horizontal,
                                     itemBuilder:
                                         (BuildContext context, int index) {
@@ -163,9 +183,9 @@ class FirstScrren extends StatelessWidget {
                                                 MainAxisAlignment.center,
                                             children: [
                                               Text(
-                                                "Day",
+                                                "${bookingController.doc_list[bookingController.doctorindex.value].availability.entries.first.key}",
                                                 style: TextStyle(
-                                                  fontSize: 20,
+                                                  fontSize: 15,
                                                   color: index ==
                                                           bookingController
                                                               .date.value
@@ -219,7 +239,14 @@ class FirstScrren extends StatelessWidget {
                               return Container(
                                 height: 60,
                                 child: ListView.separated(
-                                  itemCount: 5,
+                                  itemCount: bookingController
+                                      .doc_list[
+                                          bookingController.doctorindex.value]
+                                      .availability
+                                      .entries
+                                      .first
+                                      .key
+                                      .length,
                                   scrollDirection: Axis.horizontal,
                                   itemBuilder:
                                       (BuildContext context, int index) {
@@ -246,9 +273,10 @@ class FirstScrren extends StatelessWidget {
                                               MainAxisAlignment.center,
                                           children: [
                                             Text(
-                                              "Time",
+                                              "${bookingController.doc_list[bookingController.doctorindex.value].availability.entries}"
+                                                  .replaceAll('-', '/'),
                                               style: TextStyle(
-                                                fontSize: 25,
+                                                fontSize: 15,
                                                 color: index ==
                                                         bookingController
                                                             .time.value
@@ -300,7 +328,7 @@ class FirstScrren extends StatelessWidget {
 class Counter extends StatefulWidget {
   const Counter(
       {super.key, required this.count, required this.info, required this.im});
-  final int count;
+  final count;
   final String info;
   final String im;
 

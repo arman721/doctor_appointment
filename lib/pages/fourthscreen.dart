@@ -1,10 +1,13 @@
+import 'package:doc/controller/bookingcontroller.dart';
 import 'package:doc/pages/fithscreen.dart';
 import 'package:doc/pages/thirdscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class FourthScreen extends StatelessWidget {
-  const FourthScreen({super.key});
+  FourthScreen({super.key});
+  final BookingController bookingController = Get.put(BookingController());
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +43,7 @@ class FourthScreen extends StatelessWidget {
                     "lib/assets/images/ap_done.jpg",
                     height: 100,
                   ))),
-          const Expanded(
+          Expanded(
               flex: 2,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -60,7 +63,7 @@ class FourthScreen extends StatelessWidget {
                     height: 10,
                   ),
                   Text(
-                    "Dr. Joony William",
+                    "${bookingController.booking_confirm[0].doctorName}",
                     style: TextStyle(fontSize: 20),
                   )
                 ],
@@ -69,17 +72,17 @@ class FourthScreen extends StatelessWidget {
               flex: 2,
               child: Container(
                 padding: const EdgeInsets.all(22),
-                child: const Column(
+                child: Column(
                   children: [
                     Row(
                       children: [
                         Icon(
-                          Icons.person_3_rounded,
+                          Icons.location_on,
                           color: Colors.deepPurple,
                           size: 25,
                         ),
                         Text(
-                          "Location",
+                          "${bookingController.booking_confirm[0].location}",
                           style: TextStyle(fontSize: 25),
                         ),
                       ],
@@ -88,6 +91,7 @@ class FourthScreen extends StatelessWidget {
                       height: 15,
                     ),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Row(
                           children: [
@@ -97,13 +101,10 @@ class FourthScreen extends StatelessWidget {
                               size: 25,
                             ),
                             Text(
-                              "Date",
+                              "${DateFormat('d MMMy').format(bookingController.booking_confirm[0].appointmentDate)}",
                               style: TextStyle(fontSize: 25),
                             ),
                           ],
-                        ),
-                        SizedBox(
-                          width: 150,
                         ),
                         Row(
                           children: [
@@ -113,7 +114,7 @@ class FourthScreen extends StatelessWidget {
                               size: 25,
                             ),
                             Text(
-                              "Time",
+                              "${bookingController.booking_confirm[0].appointmentTime.substring(0, 8)}",
                               style: TextStyle(fontSize: 25),
                             ),
                           ],

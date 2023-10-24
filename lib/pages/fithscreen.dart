@@ -1,9 +1,13 @@
+import 'package:doc/controller/bookingcontroller.dart';
 import 'package:doc/pages/firstscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class FifthScreen extends StatelessWidget {
-  const FifthScreen({super.key});
+  FifthScreen({super.key});
+  final BookingController bookingController = Get.put(BookingController());
+  int j = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -41,9 +45,18 @@ class FifthScreen extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: ListView.separated(
-                    itemCount: 10,
+                    itemCount: bookingController.my_appointments.length,
                     scrollDirection: Axis.vertical,
                     itemBuilder: (BuildContext context, int index) {
+                      for (int i = 0;
+                          i < bookingController.doc_list.length;
+                          i++) {
+                        if (bookingController
+                                .my_appointments[index].doctorName ==
+                            bookingController.doc_list[i].doctorName) {
+                          j = i;
+                        }
+                      }
                       return Card(
                         shape: RoundedRectangleBorder(
                             borderRadius:
@@ -63,9 +76,11 @@ class FifthScreen extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Text(
-                                "Aug 25,2023-10:10 AM",
-                                style: TextStyle(fontSize: 22),
+                              Obx(
+                                () => Text(
+                                  "${DateFormat('MMMd').format(bookingController.my_appointments[index].appointmentDate)},${bookingController.my_appointments[index].appointmentDate.year}-${bookingController.my_appointments[index].appointmentTime.substring(0, 8)}",
+                                  style: TextStyle(fontSize: 20),
+                                ),
                               ),
                               Divider(
                                 thickness: 2,
@@ -76,8 +91,8 @@ class FifthScreen extends StatelessWidget {
                                   Container(
                                       height: 100,
                                       width: 100,
-                                      child: Image.asset(
-                                          "lib/assets/images/doc.jpg")),
+                                      child: Image.network(
+                                          "${bookingController.doc_list[j].image}")),
                                   SizedBox(
                                     width: 10,
                                   ),
@@ -88,7 +103,7 @@ class FifthScreen extends StatelessWidget {
                                         MainAxisAlignment.spaceEvenly,
                                     children: [
                                       Text(
-                                        "Dr.Jenny William",
+                                        "${bookingController.my_appointments[index].doctorName}",
                                         style: TextStyle(fontSize: 25),
                                       ),
                                       Row(
@@ -97,16 +112,17 @@ class FifthScreen extends StatelessWidget {
                                               height: 20,
                                               "lib/assets/images/loc.jpg"),
                                           Text(
-                                            "location",
-                                            style: TextStyle(fontSize: 20),
-                                          ),
+                                              "${bookingController.my_appointments[index].location}",
+                                              style: TextStyle(
+                                                fontSize: 13,
+                                              )),
                                         ],
                                       ),
                                       Row(
                                         children: [
                                           Icon(Icons.book),
                                           Text(
-                                            "Booking Id:",
+                                            "Booking Id:${bookingController.my_appointments[index].bookingId}",
                                             style: TextStyle(fontSize: 15),
                                           ),
                                         ],
