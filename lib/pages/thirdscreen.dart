@@ -44,7 +44,7 @@ class ThirdScreen extends StatelessWidget {
                       CircleAvatar(
                         radius: 70,
                         backgroundImage: NetworkImage(
-                            "https://hireforekam.s3.ap-south-1.amazonaws.com/doctors/4-Doctor.png"),
+                            "${bookingController.doc_list[bookingController.doctorindex.value].image}"),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(left: 18.0),
@@ -68,7 +68,7 @@ class ThirdScreen extends StatelessWidget {
                             Text(
                               "${bookingController.doc_list[bookingController.doctorindex.value].location}",
                               style: TextStyle(
-                                  fontSize: 18,
+                                  fontSize: 13,
                                   color: Color.fromARGB(141, 48, 24, 24)),
                             ),
                           ],

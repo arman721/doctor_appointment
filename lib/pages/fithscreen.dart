@@ -152,20 +152,37 @@ class FifthScreen extends StatelessWidget {
                                           fontSize: 30, color: Colors.blue),
                                     ),
                                   ),
-                                  Container(
-                                    alignment: Alignment.center,
-                                    decoration: BoxDecoration(
-                                        color: Colors.blue,
-                                        borderRadius:
-                                            BorderRadius.circular(35)),
-                                    height: 50,
-                                    width: 150,
-                                    child: Text(
-                                      "Reschedule",
-                                      style: TextStyle(
-                                          fontSize: 25, color: Colors.white),
+                                  InkWell(
+                                    onTap: () {
+                                      for (int i = 0;
+                                          i < bookingController.doc_list.length;
+                                          i++) {
+                                        if (bookingController
+                                                .my_appointments[index]
+                                                .doctorName ==
+                                            bookingController
+                                                .doc_list[i].doctorName) {
+                                          j = i;
+                                        }
+                                      }
+                                      bookingController.doctorindex.value = j;
+                                      Get.to(FirstScrren());
+                                    },
+                                    child: Container(
+                                      alignment: Alignment.center,
+                                      decoration: BoxDecoration(
+                                          color: Colors.blue,
+                                          borderRadius:
+                                              BorderRadius.circular(35)),
+                                      height: 50,
+                                      width: 150,
+                                      child: Text(
+                                        "Reschedule",
+                                        style: TextStyle(
+                                            fontSize: 25, color: Colors.white),
+                                      ),
                                     ),
-                                  )
+                                  ),
                                 ],
                               )
                             ],

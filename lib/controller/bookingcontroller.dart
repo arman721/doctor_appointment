@@ -45,6 +45,7 @@ class BookingController extends GetxController {
   }
 
   Future loadmyappointment() async {
+    await Future.delayed(Duration(seconds: 2));
     var myappointmentJson =
         await rootBundle.loadString("lib/assets/models/my_appointment.json");
     final decodedlist = jsonDecode(myappointmentJson);
@@ -56,6 +57,7 @@ class BookingController extends GetxController {
   }
 
   Future loaddoclist() async {
+    await Future.delayed(Duration(seconds: 2));
     var docListJson =
         await rootBundle.loadString("lib/assets/models/doc_list.json");
     final decodedlist = jsonDecode(docListJson);
@@ -68,6 +70,7 @@ class BookingController extends GetxController {
   }
 
   Future loadconfirmation() async {
+    await Future.delayed(Duration(seconds: 2));
     var conListJson =
         await rootBundle.loadString("lib/assets/models/booking_confirm.json");
     final decodedlist = jsonDecode(conListJson);
